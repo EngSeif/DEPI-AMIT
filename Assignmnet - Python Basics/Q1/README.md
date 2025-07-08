@@ -1,4 +1,4 @@
-# 🎯 Task 1: Python Basics
+# 🎯 Task 1: Grade Calculator
 
 ## 🧠 Concept Focus
 **Input**, basic **arithmetic**, and `if`/`elif`/`else` **conditions**.
