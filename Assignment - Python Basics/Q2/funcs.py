@@ -21,7 +21,7 @@ def ValidNumber(i):
         num_exp = "th"
         
     try:
-        x = int(input(f"Enter {i}{num_exp} Number : "))
+        x = float(input(f"Enter {i}{num_exp} Number : "))
         return x
     except ValueError:
         print("You Entered an Invalid Value")
