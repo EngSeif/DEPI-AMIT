@@ -13,12 +13,9 @@ Write a ```function is_prime(number)``` that takes an integer as input. The func
 ## 💡 Example Output
 
 ```
-Enter Number : 2
-Number is Prime
-
-Enter Number : 4
-Number is NOT Prime
-
+> Enter Your Sentence : Emma is Smart Emma is Worderful
+> Case Sensitive or Not (y/n):y
+{'Emma': 2, 'is': 2, 'Smart': 1, 'Worderful': 1}
 ```
 ## Useful Resources
 

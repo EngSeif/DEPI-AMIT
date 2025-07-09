@@ -13,6 +13,7 @@ Write a ```function word_count(sentence)``` that takes a string (a sentence) as 
 ## 💡 Example Output
 
 ```
-> Enter Student Grade : 95 
-Student Score : A 
+> Enter Your Sentence : Emma is Smart Emma is Worderful
+> Case Sensitive or Not (y/n):y
+{'Emma': 2, 'is': 2, 'Smart': 1, 'Worderful': 1}
 ```
