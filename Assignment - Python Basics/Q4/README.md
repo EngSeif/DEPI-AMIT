@@ -1,4 +1,4 @@
-# 🎯 Task 3: Word Counter
+# 🎯 Task 4: Is Prime Number
 
 ## 🧠 Concept Focus
 
