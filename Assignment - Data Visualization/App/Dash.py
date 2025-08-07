@@ -1,4 +1,6 @@
 # Import Necessary Modules 
+from components.HeadTitle import HeadTitle
+from components.Intro import Intro
 
 try:
     import dash
@@ -25,9 +27,14 @@ except ImportError as e:
 app = Dash(__name__, title='Titanic Survival Dashboard', external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = dbc.Container(
-    dbc.Row([
-        dbc.Col(html.H1("Titanic Dashboard", className="text-center text-primary my-2"), width=12)
-    ])
+    [   
+        HeadTitle,
+        Intro
+    ],
+    style= {
+        "backgroundColor": "#E6F2FF"
+    },
+    fluid=True
 )
 
 
