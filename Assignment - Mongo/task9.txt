@@ -1,0 +1,11 @@
+db.school.insertOne({
+  name: "Akram",
+  courses: ["Math", "Physics"]
+})
+
+db.school.updateOne(
+  {name: "Akram"},
+  {$push: {courses: "AI"}}
+)
+
+db.school.find({courses: "AI"})

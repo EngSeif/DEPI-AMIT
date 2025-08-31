@@ -1,0 +1,3 @@
+db.school.aggregate([
+  {$group: {_id: "$major", count: {$sum: 1}}}
+])

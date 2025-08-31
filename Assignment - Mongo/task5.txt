@@ -1,0 +1,4 @@
+db.school.updateOne(
+  {name: 'Ahmed'},
+  {$unset: {age: ""}}
+)

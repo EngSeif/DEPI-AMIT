@@ -1,0 +1,4 @@
+db.school.find({
+  major: "Math",
+  age: {$gt: 20}
+})

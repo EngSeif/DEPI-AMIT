@@ -1,0 +1,5 @@
+db.school.insertMany([
+  {name: "Ahmed", age: 21, major: "Math"},
+  {name: "Seif", age: 23, major: "Science"},
+  {name: "Omar", age: 24, major: "Engineering"}
+])

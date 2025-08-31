@@ -1,0 +1,6 @@
+use school
+db.school.insertOne({
+  name: "John",
+  age: 25,
+  major: "Bio"
+})

@@ -12,12 +12,14 @@ CREATE DATABASE IF NOT EXISTS company_employee_db;
 USE company_employee_db;
 
 
+
 -- Create Table Department
 
 CREATE TABLE IF NOT EXISTS department (
     dept_id INT PRIMARY KEY AUTO_INCREMENT,
     dept_name VARCHAR(255)
 );
+
 
 
 -- Create Table Employees
@@ -34,6 +36,7 @@ CREATE TABLE IF NOT EXISTS employees (
 );
 
 
+
 -- Create Table Project
 
 CREATE Table IF NOT EXISTS project (
@@ -42,6 +45,7 @@ CREATE Table IF NOT EXISTS project (
     start_date DATE,
     end_date DATE
 );
+
 
 
 -- Table Works On
@@ -54,6 +58,7 @@ CREATE Table IF NOT EXISTS works_on (
     FOREIGN KEY (emp_id) REFERENCES employees(emp_id),
     PRIMARY KEY (proj_id, emp_id)
 );
+
 
 
 -- Insert Data Department
@@ -83,6 +88,7 @@ VALUES
     ('Fatma', 'Mahmoud', 'Tanta', '01066665555', '2019-07-30', 5);
 
 
+
 INSERT INTO project (p_name, start_date, end_date)
 VALUES
     ('Website Redesign', '2023-01-01', '2023-06-30'),
@@ -102,7 +108,9 @@ VALUES
     (4, 4, 90),
     (4, 9, 110),
     (5, 5, 130),
-    (5, 10, 70);
+    (5, 10, 70),
+    (1, 5, 17);
+
 
 
 /*markdown
@@ -123,6 +131,7 @@ CREATE OR REPLACE VIEW vw_employee_details AS
 );
 
 
+
 -- 2nd Method
 
 CREATE OR REPLACE VIEW vw_employee_details AS
@@ -139,8 +148,10 @@ CREATE OR REPLACE VIEW vw_employee_details AS
 SELECT * FROM vw_employee_details;
 
 
+
 /*markdown
 #### T2 : Modify the existing view vw_work_hrs to only include employees working in department number 5.
+
 
 */
 
@@ -161,6 +172,7 @@ CREATE OR REPLACE VIEW vw_work_hrs AS
 );
 
 
+
 -- 2nd Method
 
 CREATE OR REPLACE VIEW vw_work_hrs AS 
@@ -176,6 +188,7 @@ CREATE OR REPLACE VIEW vw_work_hrs AS
     WHERE
         dept_id = 5
 );
+
 
 
 SELECT * FROM vw_work_hrs;
@@ -244,6 +257,7 @@ VALUES
     ('Laila', 'Hassan', 'Giza', '01064442222', DATE_SUB(CURRENT_DATE(), INTERVAL 10 DAY), 2);
 
 
+
 -- 1st Method
 SELECT
     *
@@ -264,17 +278,47 @@ WHERE hire_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY);
 
 DROP PROCEDURE IF EXISTS sp_get_employee_hours;
 
+
 CREATE PROCEDURE sp_get_employee_hours(IN e_id INT)
 BEGIN
     SELECT
-        fname, lname, SUM(hours) 
+        fname, lname, SUM(w.hours) as total_hours
     FROM
-        employee e
+        employees e
     JOIN works_on w ON
         e.emp_id = w.emp_id
     WHERE
         e.emp_id = e_id
-    GROUP BY emp_id;
+    GROUP BY e.emp_id;
 END;
 
 CALL sp_get_employee_hours(5);
+
+/*markdown
+#### T6 : Create a stored procedure named sp_department_employee_count that retrieves the department ID, department name, and the number of employees in each department, but only for departments with more than 5 employees.
+*/
+
+DROP PROCEDURE IF EXISTS sp_department_employee_count;
+
+CREATE PROCEDURE sp_department_employee_count(IN d_id INT)
+BEGIN
+    SELECT
+        d.dept_id, d.dept_name, COUNT(d.dept_id) as employees_count
+    FROM
+        department d
+    JOIN employees e ON
+        d.dept_id = e.dept_id
+    GROUP BY d.dept_id
+    HAVING COUNT(d.dept_id) > 5;
+END
+
+-- More Employees
+INSERT INTO employees (fname, lname, location, phone_number, hire_date, dept_id)
+VALUES
+    ('Omar', 'Hassan', 'Cairo', '01064440011', '2025-08-01', 5),
+    ('Sara', 'Ali', 'Giza', '01064440012', '2025-08-05', 5),
+    ('Youssef', 'Khaled', 'Cairo', '01064440013', '2025-08-10', 5),
+    ('Mariam', 'Adel', 'Alex', '01064440014', '2025-08-15', 5),
+    ('Ahmed', 'Fahmy', 'Cairo', '01064440015', '2025-08-20', 5);
+
+CALL sp_department_employee_count(5);
